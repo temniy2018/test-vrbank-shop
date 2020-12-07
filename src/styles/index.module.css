@@ -1,0 +1,37 @@
+.productType {
+    margin: 30px 0 0;
+}
+
+.productRoot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.productRoot_product {
+    width: 30%;
+    margin: 15px 0;
+    border-radius: 5px;
+    background-color: #fff;
+    min-width: 140px;
+}
+
+.productRoot_product__img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: 0;
+}
+
+.productRoot_product__name {
+    color: #333;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.productRoot_product__price {
+    color: #777;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 10px 10px;
+}

@@ -1,0 +1,27 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 200px;
+    background-color: #eaeaea;
+}
+
+.footer__img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 160px;
+    margin-bottom: 0;
+}
+
+.footer_copywriteRoot {
+    max-width: 70%;
+    width: 100%;
+}
+
+.footer_copywriteRoot__text {
+    margin: 160px 0 0;
+    color: #828282;
+    font-size: 14px;
+    font-weight: 700;
+}

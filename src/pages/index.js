@@ -1,22 +1,57 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import Layout from "../components/layout";
+import s from '../styles/index.module.css';
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+const IndexPage = () => {
+  const data = useStaticQuery(pageQuery);
+  const types = new Set();
+  data.allStrapiProducts.edges.map(el => types.add(el.node.type));
+  let code = [];
+  types.forEach((value, valueAgain, types) => {
+    const typeData = data.allStrapiProducts.edges.filter(
+      el => el.node.type === value
+    )
+    code.push(
+      <article>
+        <h2 className={s.productType}>{value}</h2>
+        <div className={s.productRoot}>
+          {typeData.map(el => (
+            <div className={s.productRoot_product}>
+              <img
+                src={`http://localhost:1337${el.node.img[0].url}`}
+                alt={value}
+                className={s.productRoot_product__img}
+              />
+              <p className={s.productRoot_product__name}>{el.node.name}</p>
+              <p className={s.productRoot_product__price}>USD {el.node.price.toFixed(2)}</p>
+            </div>
+          ))}
+        </div>
+      </article>
+    )
+  });
+
+  return <Layout bgColor='#f5f5f5' >{code.map(el => el)}</Layout>
+}
 
 export default IndexPage
+
+const pageQuery = graphql`
+  query IndexQuery {
+    allStrapiProducts {
+      edges {
+        node {
+          id
+          name
+          price
+          type
+          img {
+            url
+          }
+        }
+      }
+    }
+  }
+`
